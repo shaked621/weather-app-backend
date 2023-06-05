@@ -3,11 +3,6 @@ import { AxiosAdapter } from "../axios/axios";
 import { Temp } from "../model/temp";
 
 export class WeatherController {
-  //   myIp: string;
-  lat: number;
-  long: number;
-  //   static myIp: any;
-
   static async getweather(req: Request, res: Response, next: NextFunction) {
     try {
       const geo = await WeatherController.getGeoLocation();
