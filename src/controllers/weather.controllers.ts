@@ -3,6 +3,12 @@ import { AxiosAdapter } from "../axios/axios";
 import { Temp } from "../model/temp";
 
 export class WeatherController {
+  /**
+   * Get the Weather data in your Geolocation
+   * @param req
+   * @param res
+   * @param next
+   */
   static async getweather(req: Request, res: Response, next: NextFunction) {
     try {
       const geo = await WeatherController.getGeoLocation();
@@ -29,6 +35,11 @@ export class WeatherController {
     }
   }
 
+  /**
+   * Get your Geolocation
+   * Using API https://geocoding-api.open-meteo.com/v1/search?name=${cityName}&count=10&language=en&format=json
+   * @returns
+   */
   static async getGeoLocation() {
     const responseLocation = await WeatherController.getLocation();
     let cityName: string = responseLocation?.location?.region;
@@ -51,6 +62,11 @@ export class WeatherController {
     } catch (error) {}
   }
 
+  /**
+   * Get your City name,
+   * using API: https://geo.ipify.org/api/v2/country?
+   * @returns
+   */
   static async getLocation() {
     let api_key = "at_bm4PkgUVpVFgpnlX61F9u6YJXXYcq";
     let api_url = "https://geo.ipify.org/api/v2/country?";
@@ -71,6 +87,11 @@ export class WeatherController {
     }
   }
 
+  /**
+   * Get your computer IP,
+   * using API: https://api.ipify.org
+   * @returns
+   */
   static async getIp() {
     try {
       const axios = AxiosAdapter.createAxiosAdapter("https://api.ipify.org");
@@ -84,6 +105,7 @@ export class WeatherController {
     }
   }
 
+  //Using to change string to message format
   static stringChange(cityName: string): void {
     if (cityName) {
       let lastIndex = cityName.lastIndexOf(" ");
